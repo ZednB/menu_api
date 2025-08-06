@@ -1,6 +1,6 @@
 import enum
 
-from sqlalchemy import Column, Integer, String, Text, Float, Enum
+from sqlalchemy import Column, Integer, String, Text, Float, Enum, ForeignKey
 from sqlalchemy.orm import relationship
 
 from core.database import Base
@@ -22,3 +22,4 @@ class Dish(Base):
     price = Column(Float, nullable=False)
     category = Column(Enum(DishCategory), nullable=True)
     orders = relationship('Order', secondary=order_dish_association, back_populates='dishes')
+    # order_id = Column(Integer, ForeignKey("orders.id"), nullable=True)

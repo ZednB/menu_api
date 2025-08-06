@@ -1,9 +1,12 @@
-from typing import Optional
-
+from typing import Optional, TYPE_CHECKING
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    from orders.schemas import OrderRead
 
 
 class DishBase(BaseModel):
+    id: int
     name: str
     description: Optional[str]
     price: float
@@ -11,11 +14,14 @@ class DishBase(BaseModel):
 
 
 class DishCreate(DishBase):
-    pass
+    order_id: Optional[int] = None
 
 
 class DishRead(DishBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+DishRead.model_rebuild()

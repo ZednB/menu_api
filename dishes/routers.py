@@ -1,7 +1,6 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
 from dishes.schemas import DishRead, DishCreate
 from dishes.services import get_dishes, delete_dishes, create_dish
 from core.database import get_db

@@ -10,7 +10,12 @@ from dishes.schemas import DishCreate
 
 
 def create_dish(dish_data: DishCreate, db: Session) -> Dish:
-    new_dish = Dish(**dish_data.dict())
+    new_dish = Dish(
+        name=dish_data.name,
+        description=dish_data.description,
+        price=dish_data.price,
+        order_id=dish_data.order_id
+    )
     db.add(new_dish)
     db.commit()
     db.refresh(new_dish)
