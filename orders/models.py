@@ -10,7 +10,7 @@ class StatusOrder(str, enum.Enum):
     processing = 'В обработке'
     getting_ready = 'Готовится'
     delivering = 'Доставляется'
-    done = 'Завершен'
+    done = 'Доставлен'
 
 
 order_dish_association = Table(

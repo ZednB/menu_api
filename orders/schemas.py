@@ -1,13 +1,14 @@
-from typing import List, TYPE_CHECKING, Optional
+from typing import List, TYPE_CHECKING, Optional, ForwardRef
 from pydantic import BaseModel
 from datetime import datetime
 
 if TYPE_CHECKING:
     from dishes.schemas import DishRead
 
+DishReadRef = ForwardRef("DishRead")
+
 
 class OrderBase(BaseModel):
-    id: int
     customer_name: str
     order_time: datetime
     status: str
@@ -19,6 +20,7 @@ class OrderCreate(OrderBase):
 
 class OrderRead(OrderBase):
     id: int
+    dishes: List[DishReadRef]  # ✅ Используем ForwardRef
 
     class Config:
         from_attributes = True
@@ -31,4 +33,5 @@ class OrderUpdate(BaseModel):
     dishes: Optional[List[int]] = None
 
 
+from dishes.schemas import DishRead
 OrderRead.model_rebuild()

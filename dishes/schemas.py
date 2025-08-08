@@ -6,22 +6,20 @@ if TYPE_CHECKING:
 
 
 class DishBase(BaseModel):
-    id: int
+    # id: int
     name: str
     description: Optional[str]
     price: float
-    category: str
+    category: Optional[str] = None
 
 
 class DishCreate(DishBase):
     order_id: Optional[int] = None
 
-
 class DishRead(DishBase):
     id: int
+    name: str
+    price: float
 
     class Config:
         from_attributes = True
-
-
-DishRead.model_rebuild()

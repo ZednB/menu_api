@@ -11,7 +11,7 @@ from orders.services import get_orders, create_order, delete_order
 router = APIRouter(prefix='/orders', tags=['orders'])
 
 
-@router.post('/', response_model=OrderRead)
+@router.post('/', response_model=OrderRead, status_code=201)
 def create_order_view(order: OrderCreate, db: Session = Depends(get_db)):
     return create_order(order, db)
 
